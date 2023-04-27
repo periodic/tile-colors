@@ -1,0 +1,65 @@
+body {
+  background-color: #ccc;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.App-tiles {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  flex-wrap: wrap;
+}
+
+.App-tileRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.App-tileRow--offset-50:nth-child(2n) {
+  margin-left: 60px;
+}
+
+.App-tileRow--offset-33:nth-child(3n + 2) {
+  margin-left: 40px;
+}
+
+.App-tileRow--offset-33:nth-child(3n) {
+  margin-left: 80px;
+}
+
+.App-tileRow--offset-25:nth-child(4n + 2) {
+  margin-left: 30px;
+}
+
+.App-tileRow--offset-25:nth-child(4n + 3) {
+  margin-left: 60px;
+}
+
+.App-tileRow--offset-25:nth-child(4n) {
+  margin-left: 90px;
+}
+
+.App-tile {
+  width: 120px;
+  height: 30px;
+  margin-right: 5px;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.App-tiles--vertical {
+  transform: rotate(90deg);
+}
+
+.App-tile--white {
+  background-color: #ffd;
+}
+.App-tile--green {
+  background-color: rgb(30, 109, 56);
+}
+.App-tile--brown {
+  background-color: rgb(197, 127, 57);
+}

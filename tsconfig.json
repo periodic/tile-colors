@@ -1,0 +1,27 @@
+{
+  "name": "color-tiles-app",
+  "description": "A React app that displays a grid of color tiles based on user input.",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start"
+  },
+  "compilerOptions": {
+    "jsx": "react",
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "^5.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
+    "@babel/preset-react": "^7.16.7"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  }
+}
