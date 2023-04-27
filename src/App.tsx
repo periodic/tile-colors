@@ -8,35 +8,14 @@ type Tile = {
   color: Color;
 };
 
-const JITTER = 0.2;
-
 const App = () => {
   const [whiteValue, setWhiteValue] = useState(0);
   const [greenValue, setGreenValue] = useState(0);
   const [brownValue, setBrownValue] = useState(0);
   const [pattern, setPatternValue] = useState<'grid' | 'offset-50' | 'offset-33' | 'offset-25'>('grid');
-  const [strategy, setStrategyValue] = useState<'random' | 'deterministic' | 'converging'>('random')
+  const [randomness, setRandomnessValue] = useState(0.2)
   const [rotation, setRotationValue] = useState<'horizontal' | 'vertical'>('horizontal')
   const [tiles, setTiles] = useState([] as Tile[][]);
-
-  const randomizeTiles = () => {
-    const totalValue = whiteValue + greenValue + brownValue;
-    const proportions = [
-      whiteValue / totalValue,
-      greenValue / totalValue,
-      brownValue / totalValue,
-    ];
-    const newTiles: Tile[][] = [];
-    for (let row = 0; row < 20; row++) {
-      const rowTiles = []
-      for (let col = 0; col < 10; col++) {
-        const color = pickRandomColor(proportions);
-        rowTiles.push({ color });
-      }
-      newTiles.push(rowTiles);
-    }
-    setTiles(newTiles);
-  };
 
   const targettedRandom = () => {
     const totalValue = whiteValue + greenValue + brownValue;
@@ -54,7 +33,7 @@ const App = () => {
       const rowTiles = []
       for (let col = 0; col < 10; col++) {
         let color;
-        if (totalCount == 0 || Math.random() < JITTER) {
+        if (totalCount === 0 || Math.random() < randomness) {
           const proportions = [
             whiteValue / totalValue,
             greenValue / totalValue,
@@ -68,7 +47,7 @@ const App = () => {
 
           const totalDiff = whiteDiff + greenDiff + brownDiff;
 
-          if (totalDiff == 0) {
+          if (totalDiff === 0) {
             const proportions = [
               whiteValue / totalValue,
               greenValue / totalValue,
@@ -94,54 +73,12 @@ const App = () => {
     setTiles(newTiles);
   };
 
-  const deterministicTiles = () => {
-    const totalValue = whiteValue + greenValue + brownValue;
-    const whiteTarget = whiteValue / totalValue;
-    const greenTarget = greenValue / totalValue;
-    const brownTarget = brownValue / totalValue;
-    let whiteCount = 0;
-    let greenCount = 0;
-    let brownCount = 0;
-    let totalCount = 0;
-    const newTiles: Tile[][] = [];
-    for (let row = 0; row < 20; row++) {
-      const rowTiles = []
-      for (let col = 0; col < 10; col++) {
-        if (totalCount == 0) {
-          rowTiles.push({ color: 'green' });
-          greenCount++;
-        } else if (whiteCount / totalCount < whiteTarget) {
-          rowTiles.push({ color: 'white' });
-          whiteCount++;
-        } else if (greenCount / totalCount < greenTarget) {
-          rowTiles.push({ color: 'green' });
-          greenCount++;
-        } else if (brownCount / totalCount < brownTarget) {
-          rowTiles.push({ color: 'brown' });
-          brownCount++;
-        }
-        totalCount++;
-      }
-      newTiles.push(rowTiles);
-    }
-    setTiles(newTiles);
-  };
 
   const generateTiles = () => {
-    switch (strategy) {
-      case 'random':
-        randomizeTiles();
-        break;
-      case 'deterministic':
-        deterministicTiles();
-        break;
-      case 'converging':
-        targettedRandom();
-        break;
-    }
+    targettedRandom();
   }
 
-  useEffect(generateTiles, [whiteValue, greenValue, brownValue, strategy]);
+  useEffect(generateTiles, [whiteValue, greenValue, brownValue, randomness]);
 
   const pickRandomColor = (proportions): Color => {
     const COLORS: Color[] = ["white" , "green" , "brown" ];
@@ -173,8 +110,8 @@ const App = () => {
     setPatternValue(event.target.value);
   };
 
-  const handleStrategyChange = (event) => {
-    setStrategyValue(event.target.value);
+  const handleRandomnessChange = (event) => {
+    setRandomnessValue(event.target.value);
   };
 
   const handleRotationChange = (event) => {
@@ -212,12 +149,8 @@ const App = () => {
         </select>
       </div>
       <div>
-        <label htmlFor="strategy">Strategy:</label>
-        <select id="strategy" value={strategy} onChange={handleStrategyChange}>
-          <option value="random">Random</option>
-          <option value="deterministic">Deterministic</option>
-          <option value="converging">Converging</option>
-        </select>
+        <label htmlFor="randomness">Randomness:</label>
+        <input id="randomness" type="range" min="0" max="1" step="0.1" value={randomness} onChange={handleRandomnessChange} />
       </div>
       <div>
         <button onClick={generateTiles}>Regenerate</button>
