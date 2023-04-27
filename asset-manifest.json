@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.baa55a06.css",
-    "main.js": "/static/js/main.6635831f.js",
-    "static/js/787.539eacaf.chunk.js": "/static/js/787.539eacaf.chunk.js",
-    "index.html": "/index.html",
-    "main.baa55a06.css.map": "/static/css/main.baa55a06.css.map",
-    "main.6635831f.js.map": "/static/js/main.6635831f.js.map",
-    "787.539eacaf.chunk.js.map": "/static/js/787.539eacaf.chunk.js.map"
+    "main.css": "https://periodic.github.io/tile-colors/static/css/main.baa55a06.css",
+    "main.js": "https://periodic.github.io/tile-colors/static/js/main.844c3e01.js",
+    "static/js/787.539eacaf.chunk.js": "https://periodic.github.io/tile-colors/static/js/787.539eacaf.chunk.js",
+    "index.html": "https://periodic.github.io/tile-colors/index.html",
+    "main.baa55a06.css.map": "https://periodic.github.io/tile-colors/static/css/main.baa55a06.css.map",
+    "main.844c3e01.js.map": "https://periodic.github.io/tile-colors/static/js/main.844c3e01.js.map",
+    "787.539eacaf.chunk.js.map": "https://periodic.github.io/tile-colors/static/js/787.539eacaf.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.baa55a06.css",
-    "static/js/main.6635831f.js"
+    "static/js/main.844c3e01.js"
   ]
 }
